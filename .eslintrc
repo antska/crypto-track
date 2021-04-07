@@ -1,0 +1,38 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "mocha": true,
+    "jest": true
+  },
+  "extends": ["plugin:react/recommended", "plugin:@typescript-eslint/recommended", "airbnb-typescript", "prettier", "plugin:prettier/recommended"],
+  "plugins": ["prettier", "react-hooks"],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": [".ts", ".tsx"]
+      }
+    }
+  },
+  "rules": {
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "prettier/prettier": ["error", {"singleQuote": true, "trailingComma": "all"}],
+    "import/no-named-as-default": 0,
+    "react/require-default-props": 0,
+    "no-shadow": 0,
+    "@typescript-eslint/indent": 0,
+    "import/no-unresolved": 0,
+    "react/prop-types": 0,
+    "import/prefer-default-export": 0
+  }
+}
