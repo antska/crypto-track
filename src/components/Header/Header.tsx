@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const SNav = styled.nav`
-  background-color: #f5f5f5;
+  background-color: ${({ theme }) => theme.palette.secondary.main};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -20,7 +20,7 @@ const SRightMenu = styled.div`
 const SLink = styled(Link)`
   text-decoration: none;
   font-size: 2rem;
-  color: #656565;
+  color: ${({ theme }) => theme.palette.primary.main};
 `;
 
 const Header = () => (

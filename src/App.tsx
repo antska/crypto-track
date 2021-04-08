@@ -2,12 +2,16 @@ import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Provider as ReduxProvider } from 'react-redux';
+import {
+  createGlobalStyle,
+  ThemeProvider,
+  DefaultTheme,
+} from 'styled-components';
 
 import store from 'store';
 import CoinsList from 'scenes/CoinsList';
 import NotFound from 'scenes/NotFound';
 import CoinDetails from 'scenes/CoinDetails';
-import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -15,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
   }
   
   body {
+    background: #DCDCDD;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -24,23 +29,37 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const theme: DefaultTheme = {
+  palette: {
+    primary: {
+      main: '#DCDCDD',
+      ligth: '#F5F5F5',
+    },
+    secondary: {
+      main: '#4C5C68',
+    },
+  },
+};
+
 const App = () => (
   <ReduxProvider store={store}>
-    <GlobalStyle />
-    <BrowserRouter>
-      <Helmet>
-        <html lang="en" />
-        <meta charSet="utf-8" />
-        <meta name="description" content="Cryptocurrency track dashboard" />
-        <title>Crypto Track</title>
-      </Helmet>
-      <Switch>
-        <Route exact component={NotFound} path="/not-found" />
-        <Route exact component={CoinsList} path="/" />
-        <Route exact component={CoinDetails} path="/coins/:coin" />
-        <Redirect to="/not-found" />
-      </Switch>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Helmet>
+          <html lang="en" />
+          <meta charSet="utf-8" />
+          <meta name="description" content="Cryptocurrency track dashboard" />
+          <title>Crypto Track</title>
+        </Helmet>
+        <Switch>
+          <Route exact component={NotFound} path="/not-found" />
+          <Route exact component={CoinsList} path="/" />
+          <Route exact component={CoinDetails} path="/coins/:coin" />
+          <Redirect to="/not-found" />
+        </Switch>
+      </BrowserRouter>
+    </ThemeProvider>
   </ReduxProvider>
 );
 
