@@ -1,5 +1,8 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import ReactPlaceholder from 'react-placeholder';
+import { TextRow } from 'react-placeholder/lib/placeholders';
 
 import Layout from 'components/Layout';
 import { fetchMarketsList } from 'store/markets/actions';
@@ -7,7 +10,6 @@ import {
   getCoinMarketsList,
   getIsLoadingMarkets,
 } from 'store/markets/selectors';
-import { useParams } from 'react-router';
 import {
   SImage,
   SLink,
@@ -24,8 +26,6 @@ import PercentageField from './components/PercentageField';
 import TableHeader from './components/TableHeader';
 
 const headerNames = ['Name', 'Price (USD)', '24h High', '24h Low', '24h %'];
-
-// const formatPrice = (str: string) => Number.parseFloat(str).toLocaleString();
 
 const CoinsList = () => {
   const dispatch = useDispatch();
@@ -65,7 +65,7 @@ const CoinsList = () => {
             </tr>
           </thead>
           <tbody>
-            {coins.length &&
+            {!isLoading ? (
               coins.map((item, index) => (
                 <tr key={`row-${item.name}`}>
                   <SNumber>{(currentPage - 1) * 50 + index + 1}</SNumber>
@@ -89,8 +89,24 @@ const CoinsList = () => {
                     <PercentageField perc={item.price_change_percentage_24h} />
                   </td>
                 </tr>
-              ))}
-            {!coins.length && !isLoading && <span>No coins found</span>}
+              ))
+            ) : (
+              <tr>
+                {[...headerNames, ''].map((key) => (
+                  <td key={`placeholder-${key}`}>
+                    <ReactPlaceholder
+                      type="text"
+                      ready={!isLoading}
+                      showLoadingAnimation
+                      rows={50}
+                      color="#E0E0E0"
+                    >
+                      <TextRow color="#E0E0E0" />
+                    </ReactPlaceholder>
+                  </td>
+                ))}
+              </tr>
+            )}
           </tbody>
         </STable>
       </STableWrapper>
