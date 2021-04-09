@@ -29,7 +29,7 @@ export interface CoinState {
 }
 
 export interface State {
-  details: Details;
+  details: Details | {};
   loading: boolean;
   error: boolean;
 }

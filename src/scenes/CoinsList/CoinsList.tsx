@@ -1,26 +1,59 @@
-import React from 'react';
-import { useHistory } from 'react-router';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Layout from 'components/Layout';
-import { SH1, SNumber, STable, STableWrapper } from './styled';
+import { fetchMarketsList } from 'store/markets/actions';
+import {
+  getCoinMarketsList,
+  getIsLoadingMarkets,
+} from 'store/markets/selectors';
+import { useParams } from 'react-router';
+import {
+  SImage,
+  SLink,
+  SNameContainer,
+  SNameField,
+  SNumber,
+  SPriceField,
+  SSymbolField,
+  STable,
+  STableWrapper,
+} from './styled';
+import { FETCH_INTERVAL_MS } from '../../constants';
+import PercentageField from './components/PercentageField';
+import TableHeader from './components/TableHeader';
 
-const headerNames = ['name', 'coin', 'price'];
-const data: Record<string, string>[] = [
-  { name: 'Enjin', coin: 'ENJ', price: '3' },
-  { name: 'Bitcoin', coin: 'BTC', price: '40000' },
-  { name: 'Cardano', coin: 'ADA', price: '2' },
-];
+const headerNames = ['Name', 'Price (USD)', '24h High', '24h Low', '24h %'];
+
+// const formatPrice = (str: string) => Number.parseFloat(str).toLocaleString();
 
 const CoinsList = () => {
-  const history = useHistory();
+  const dispatch = useDispatch();
+  const coins = useSelector(getCoinMarketsList());
+  const isLoading = useSelector(getIsLoadingMarkets());
+  const { page } = useParams<{ page: string }>();
 
-  const handleRowClick = (id: string) => {
-    history.push(`coins/${id}`);
-  };
+  const currentPage = page ? Number.parseInt(page, 10) : 1;
+
+  const fetchData = useCallback((pageNum: number) => {
+    dispatch(fetchMarketsList({ page: pageNum }));
+  }, []);
+
+  useEffect(() => {
+    fetchData(currentPage);
+    const interval = setInterval(
+      () => fetchData(currentPage),
+      FETCH_INTERVAL_MS,
+    );
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [currentPage]);
 
   return (
     <Layout>
-      <SH1>Cryptocurrencies </SH1>
+      <TableHeader page={currentPage} />
       <STableWrapper>
         <STable>
           <thead>
@@ -32,14 +65,32 @@ const CoinsList = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => (
-              <tr key={item.name} onClick={() => handleRowClick(item.name)}>
-                <SNumber>{index + 1}</SNumber>
-                {Object.keys(item).map((itemData) => (
-                  <td>{item[itemData]}</td>
-                ))}
-              </tr>
-            ))}
+            {coins.length &&
+              coins.map((item, index) => (
+                <tr key={`row-${item.name}`}>
+                  <SNumber>{(currentPage - 1) * 50 + index + 1}</SNumber>
+                  <td>
+                    <SLink to={`/coins/${item.id}`}>
+                      <SNameContainer>
+                        <SImage src={item.image} alt={item.name} />
+                        <div>
+                          <SSymbolField>{item.symbol}</SSymbolField>
+                          <SNameField>{item.name}</SNameField>
+                        </div>
+                      </SNameContainer>
+                    </SLink>
+                  </td>
+                  <SPriceField>
+                    ${item.current_price.toLocaleString()}
+                  </SPriceField>
+                  <td>${item.high_24h.toLocaleString()}</td>
+                  <td>${item.low_24h.toLocaleString()}</td>
+                  <td>
+                    <PercentageField perc={item.price_change_percentage_24h} />
+                  </td>
+                </tr>
+              ))}
+            {!coins.length && !isLoading && <span>No coins found</span>}
           </tbody>
         </STable>
       </STableWrapper>

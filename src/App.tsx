@@ -27,6 +27,11 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 `;
 
 const theme: DefaultTheme = {
@@ -37,6 +42,7 @@ const theme: DefaultTheme = {
     },
     secondary: {
       main: '#4C5C68',
+      alt: '#11586A',
     },
   },
 };
@@ -55,7 +61,10 @@ const App = () => (
         <Switch>
           <Route exact component={NotFound} path="/not-found" />
           <Route exact component={CoinsList} path="/" />
+          <Route exact component={CoinsList} path="/markets" />
+          <Route exact component={CoinsList} path="/markets/:page" />
           <Route exact component={CoinDetails} path="/coins/:coin" />
+          <Redirect exact from="/" to="/markets" />
           <Redirect to="/not-found" />
         </Switch>
       </BrowserRouter>
