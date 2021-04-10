@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
+import { SBoxContainer } from 'scenes/CoinDetails/styled';
 import GraphRanges from './components/GraphRanges';
 import defaultOptions from './defaultOptions';
 
@@ -10,15 +11,6 @@ interface Props {
   data: number[][];
   isGraphLoading: boolean;
 }
-
-const SChartContainer = styled.div`
-  background: white;
-  border: 1px solid ${({ theme }) => theme.palette.primary.main};
-  border-radius: 10px;
-  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
-  padding: 5px;
-  width: 100%;
-`;
 
 const SWrapper = styled.div`
   width: 100%;
@@ -62,14 +54,14 @@ const Graph = ({ data, isGraphLoading }: Props) => {
   return (
     <SWrapper>
       <GraphRanges />
-      <SChartContainer>
+      <SBoxContainer>
         <HighchartsReact
           highcharts={Highcharts}
           options={options}
           ref={graphRef}
           immutable
         />
-      </SChartContainer>
+      </SBoxContainer>
     </SWrapper>
   );
 };

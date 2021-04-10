@@ -11,6 +11,7 @@ import {
 
 import { getCoinDetails } from 'store/coin/selectors';
 import PercentageField from 'components/PercentageField';
+import { Currency } from 'store/coin/types';
 import {
   SContainer,
   SPriceContainer,
@@ -71,9 +72,13 @@ const DetailsHeader = () => {
           <h1>{symbol?.toUpperCase()}</h1>
         </STitleContainer>
         <STitleContainer>
-          <h1>${market_data?.current_price.usd.toLocaleString()}</h1>
+          <h1>
+            ${(market_data?.current_price as Currency).usd.toLocaleString()}
+          </h1>
           {market_data?.price_change_percentage_24h && (
-            <PercentageField perc={market_data?.price_change_percentage_24h} />
+            <PercentageField
+              perc={market_data?.price_change_percentage_24h as number}
+            />
           )}
         </STitleContainer>
       </SPriceContainer>

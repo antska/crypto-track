@@ -18,16 +18,19 @@ type Links = {
   repos_url: { github: string[] };
 };
 
+export type Currency = { [currency: string]: number };
+
+type PriceChange = {
+  [key: string]: number | Currency;
+};
+
 export type Details = {
   name: string;
   symbol: string;
   description: { en: string };
   links: Links;
   image: { thumb: string; small: string; large: string };
-  market_data: {
-    current_price: { [currency: string]: number };
-    price_change_percentage_24h: number;
-  };
+  market_data: PriceChange;
 };
 
 export interface CoinState {

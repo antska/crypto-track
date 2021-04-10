@@ -34,3 +34,13 @@ export const CHART_RANGES = [
     value: 'max',
   },
 ];
+
+export const CHANGE_PERCENTAGES = [
+  { name: '24h % Change', value: 'price_change_percentage_24h' },
+  { name: '7d % Change', value: 'price_change_percentage_7d' },
+  { name: '14d % Change', value: 'price_change_percentage_14d' },
+  { name: '1m % Change', value: 'price_change_percentage_30d' },
+  { name: '2m % Change', value: 'price_change_percentage_60d' },
+  { name: '200d % Change', value: 'price_change_percentage_200d' },
+  { name: '1y % Change', value: 'price_change_percentage_1y' },
+];
