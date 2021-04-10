@@ -12,6 +12,7 @@ type Links = {
   homepage: string[];
   official_forum_url: string[];
   subreddit_url: string;
+  telegram_channel_identifier: string;
   twitter_screen_name: string;
   facebook_username: string;
   repos_url: { github: string[] };
