@@ -10,6 +10,7 @@ import {
   getCoinMarketsList,
   getIsLoadingMarkets,
 } from 'store/markets/selectors';
+import PercentageField from 'components/PercentageField';
 import {
   SImage,
   SLink,
@@ -22,7 +23,6 @@ import {
   STableWrapper,
 } from './styled';
 import { FETCH_INTERVAL_MS } from '../../constants';
-import PercentageField from './components/PercentageField';
 import TableHeader from './components/TableHeader';
 
 const headerNames = ['Name', 'Price (USD)', '24h High', '24h Low', '24h %'];

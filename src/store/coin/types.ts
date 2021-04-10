@@ -19,9 +19,14 @@ type Links = {
 
 export type Details = {
   name: string;
+  symbol: string;
   description: { en: string };
   links: Links;
-  market_data: { current_price: { [currency: string]: number } };
+  image: { thumb: string; small: string; large: string };
+  market_data: {
+    current_price: { [currency: string]: number };
+    price_change_percentage_24h: number;
+  };
 };
 
 export interface CoinState {
@@ -29,7 +34,10 @@ export interface CoinState {
 }
 
 export interface State {
-  details: Details | {};
-  loading: boolean;
+  details: Details | null;
+  graphData: number[][];
+  graphLoading: boolean;
+  detailsLoading: boolean;
   error: boolean;
+  graphDuration: string | number;
 }

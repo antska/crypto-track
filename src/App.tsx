@@ -39,6 +39,7 @@ const theme: DefaultTheme = {
     primary: {
       main: '#DCDCDD',
       ligth: '#F5F5F5',
+      gray: '#C5C3C6',
     },
     secondary: {
       main: '#4C5C68',
