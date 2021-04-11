@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import ReactPlaceholder from 'react-placeholder';
 import { TextRow } from 'react-placeholder/lib/placeholders';
-import { Redirect } from 'react-router-dom';
 
 import Layout from 'components/Layout';
 import { fetchMarketsList } from 'store/markets/actions';
@@ -13,6 +13,7 @@ import {
   getIsLoadingMarkets,
 } from 'store/markets/selectors';
 import PercentageField from 'components/PercentageField';
+import SEO from 'components/SEO';
 import {
   SImage,
   SLink,
@@ -26,7 +27,6 @@ import {
 } from './styled';
 import { FETCH_INTERVAL_MS } from '../../constants';
 import TableHeader from './components/TableHeader';
-import SEO from '../../components/SEO/SEO';
 
 const headerNames = ['Name', 'Price (USD)', '24h %', '24h High', '24h Low'];
 
@@ -90,13 +90,13 @@ const CoinsList = () => {
                     </SLink>
                   </td>
                   <SPriceField>
-                    ${item.current_price.toLocaleString()}
+                    ${item?.current_price?.toLocaleString()}
                   </SPriceField>
                   <td>
-                    <PercentageField perc={item.price_change_percentage_24h} />
+                    <PercentageField perc={item?.price_change_percentage_24h} />
                   </td>
-                  <td>${item.high_24h.toLocaleString()}</td>
-                  <td>${item.low_24h.toLocaleString()}</td>
+                  <td>${item?.high_24h?.toLocaleString()}</td>
+                  <td>${item?.low_24h?.toLocaleString()}</td>
                 </tr>
               ))
             ) : (

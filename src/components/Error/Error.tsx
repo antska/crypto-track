@@ -7,9 +7,9 @@ import { useSelector } from 'react-redux';
 
 import { getCoinDetailsError } from 'store/coin/selectors';
 import { getHasErrorMarkets } from 'store/markets/selectors';
+import SEO from 'components/SEO';
 import { queries } from '../../constants';
 import Layout from '../Layout';
-import SEO from '../SEO/SEO';
 
 const SH1 = styled.h1`
   margin-top: 10rem;
