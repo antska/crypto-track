@@ -3,7 +3,7 @@ import { State } from './types';
 const initialState: State = {
   list: [],
   loading: false,
-  error: false,
+  error: '',
   lastUpdated: null,
 };
 

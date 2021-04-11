@@ -22,8 +22,9 @@ export default produce(
         return draft;
       }
       case types.GET_COIN_DETAILS_FAILED: {
+        const { error } = action;
         draft.detailsLoading = false;
-        draft.error = true;
+        draft.error = error;
 
         return draft;
       }
@@ -40,8 +41,9 @@ export default produce(
         return draft;
       }
       case types.GET_COIN_GRAPH_FAILED: {
+        const { error } = action;
         draft.graphLoading = false;
-        draft.error = true;
+        draft.error = error;
 
         return draft;
       }

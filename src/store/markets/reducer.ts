@@ -23,8 +23,9 @@ export default produce(
         return draft;
       }
       case types.GET_MARKETS_LIST_FAILED: {
+        const { error } = action;
         draft.loading = false;
-        draft.error = true;
+        draft.error = error;
 
         return draft;
       }

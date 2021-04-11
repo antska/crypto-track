@@ -4,11 +4,13 @@ import { useParams } from 'react-router';
 import ReactPlaceholder from 'react-placeholder';
 import parse from 'html-react-parser';
 import { MdExpandMore } from 'react-icons/md';
+import { Redirect } from 'react-router-dom';
 
 import Layout from 'components/Layout';
 import { fetchCoinDetails, fetchCoinGraph } from 'store/coin/actions';
 import {
   getCoinDetails,
+  getCoinDetailsError,
   getCoinDetailsLoading,
   getCoinGraphData,
   getCoinGraphDuration,
@@ -29,6 +31,7 @@ const CoinDetails = () => {
   const graphData = useSelector(getCoinGraphData());
   const isGraphLoading = useSelector(getCoinGraphLoading());
   const isDetailsLoading = useSelector(getCoinDetailsLoading());
+  const error = useSelector(getCoinDetailsError());
   const details = useSelector(getCoinDetails());
   const days = useSelector(getCoinGraphDuration());
   const { coin } = useParams<{ coin: string }>();
@@ -57,9 +60,20 @@ const CoinDetails = () => {
     details?.description.en.length > 400 &&
     descriptionText.length !== details?.description.en.length;
 
+  if (error) {
+    return <Redirect to="/error" />;
+  }
+
   return (
     <Layout>
-      <DetailsHeader />
+      <ReactPlaceholder
+        type="text"
+        ready={!isDetailsLoading}
+        showLoadingAnimation
+        rows={4}
+      >
+        <DetailsHeader />
+      </ReactPlaceholder>
       <Graph
         isGraphLoading={isGraphLoading || isDetailsLoading}
         data={graphData}
@@ -71,7 +85,6 @@ const CoinDetails = () => {
           ready={!isDetailsLoading}
           showLoadingAnimation
           rows={10}
-          color="#E0E0E0"
         >
           <SDescription>{parse(descriptionText)}</SDescription>
           {isExpandBtnVisible && (
@@ -86,7 +99,15 @@ const CoinDetails = () => {
       </SBoxContainer>
       <SBoxContainer>
         <SBoxTitle>Statistics</SBoxTitle>
-        <CoinStatistics />
+        <ReactPlaceholder
+          type="text"
+          ready={!isDetailsLoading}
+          showLoadingAnimation
+          rows={10}
+          color="#E0E0E0"
+        >
+          <CoinStatistics />
+        </ReactPlaceholder>
       </SBoxContainer>
     </Layout>
   );

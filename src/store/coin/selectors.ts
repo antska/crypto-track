@@ -20,3 +20,6 @@ export const getCoinGraphLoading = () =>
 
 export const getCoinDetailsLoading = () =>
   createSelector(getCoinState, (coin) => coin.detailsLoading);
+
+export const getCoinDetailsError = () =>
+  createSelector(getCoinState, (coin) => coin.error);

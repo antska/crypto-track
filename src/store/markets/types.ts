@@ -26,6 +26,6 @@ export interface MarketsState {
 export interface State {
   list: Array<Markets>;
   loading: boolean;
-  error: boolean;
+  error: string;
   lastUpdated: string | null;
 }

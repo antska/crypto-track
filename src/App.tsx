@@ -9,8 +9,8 @@ import {
 } from 'styled-components';
 
 import store from 'store';
+import Error from 'components/Error';
 import CoinsList from 'scenes/CoinsList';
-import NotFound from 'scenes/NotFound';
 import CoinDetails from 'scenes/CoinDetails';
 
 const GlobalStyle = createGlobalStyle`
@@ -60,7 +60,7 @@ const App = () => (
           <title>Crypto Track</title>
         </Helmet>
         <Switch>
-          <Route exact component={NotFound} path="/not-found" />
+          <Route exact component={Error} path="/not-found" />
           <Route exact component={CoinsList} path="/" />
           <Route exact component={CoinsList} path="/markets" />
           <Route exact component={CoinsList} path="/markets/:page" />

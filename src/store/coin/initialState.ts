@@ -5,7 +5,7 @@ const initialState: State = {
   graphData: [],
   graphLoading: false,
   detailsLoading: false,
-  error: false,
+  error: '',
   graphDuration: 'max',
 };
 

@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import ReactPlaceholder from 'react-placeholder';
 import { TextRow } from 'react-placeholder/lib/placeholders';
+import { Redirect } from 'react-router-dom';
 
 import Layout from 'components/Layout';
 import { fetchMarketsList } from 'store/markets/actions';
 import {
   getCoinMarketsList,
+  getHasErrorMarkets,
   getIsLoadingMarkets,
 } from 'store/markets/selectors';
 import PercentageField from 'components/PercentageField';
@@ -30,6 +32,7 @@ const headerNames = ['Name', 'Price (USD)', '24h High', '24h Low', '24h %'];
 const CoinsList = () => {
   const dispatch = useDispatch();
   const coins = useSelector(getCoinMarketsList());
+  const error = useSelector(getHasErrorMarkets());
   const isLoading = useSelector(getIsLoadingMarkets());
   const { page } = useParams<{ page: string }>();
 
@@ -50,6 +53,10 @@ const CoinsList = () => {
       clearInterval(interval);
     };
   }, [currentPage]);
+
+  if (error) {
+    return <Redirect to="/error" />;
+  }
 
   return (
     <Layout>

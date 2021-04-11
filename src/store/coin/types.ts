@@ -48,6 +48,6 @@ export interface State {
   graphData: number[][];
   graphLoading: boolean;
   detailsLoading: boolean;
-  error: boolean;
+  error: string;
   graphDuration: string | number;
 }
