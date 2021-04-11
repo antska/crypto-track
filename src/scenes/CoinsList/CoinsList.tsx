@@ -26,6 +26,7 @@ import {
 } from './styled';
 import { FETCH_INTERVAL_MS } from '../../constants';
 import TableHeader from './components/TableHeader';
+import SEO from '../../components/SEO/SEO';
 
 const headerNames = ['Name', 'Price (USD)', '24h %', '24h High', '24h Low'];
 
@@ -60,6 +61,7 @@ const CoinsList = () => {
 
   return (
     <Layout>
+      <SEO title="Crypto Track - Homepage" />
       <TableHeader page={currentPage} />
       <STableWrapper>
         <STable>

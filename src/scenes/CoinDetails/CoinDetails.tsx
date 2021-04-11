@@ -25,6 +25,7 @@ import {
   SMoreContainer,
 } from './styled';
 import CoinStatistics from './components/CoinStatistics';
+import SEO from '../../components/SEO/SEO';
 
 const CoinDetails = () => {
   const dispatch = useDispatch();
@@ -66,6 +67,11 @@ const CoinDetails = () => {
 
   return (
     <Layout>
+      <SEO
+        title={`Crypto Track  ${
+          details?.symbol ? `- ${details.symbol.toUpperCase()}` : ''
+        }`}
+      />
       <ReactPlaceholder
         type="text"
         ready={!isDetailsLoading}

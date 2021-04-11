@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import { Provider as ReduxProvider } from 'react-redux';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
@@ -36,12 +35,6 @@ const App = () => (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <BrowserRouter>
-        <Helmet>
-          <html lang="en" />
-          <meta charSet="utf-8" />
-          <meta name="description" content="Cryptocurrency track dashboard" />
-          <title>Crypto Track</title>
-        </Helmet>
         <Switch>
           <Route exact component={Error} path="/not-found" />
           <Route exact component={CoinsList} path="/" />

@@ -9,6 +9,7 @@ import { getCoinDetailsError } from 'store/coin/selectors';
 import { getHasErrorMarkets } from 'store/markets/selectors';
 import { queries } from '../../constants';
 import Layout from '../Layout';
+import SEO from '../SEO/SEO';
 
 const SH1 = styled.h1`
   margin-top: 10rem;
@@ -47,6 +48,7 @@ const Error = () => {
 
   return (
     <Layout>
+      <SEO title="Crypto Track - Error page" />
       <SH1 data-test="error-msg">{errorMessage || 'NOTHING FOUND HERE :('}</SH1>
       <BsGraphDown size="7em" color="darkred" />
       <SLink data-test="go-home" to="/">

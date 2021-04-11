@@ -71,13 +71,15 @@ const DetailsHeader = () => {
         <STitleContainer data-test="title-container">
           <img src={image?.small} alt={name} />
           <h1>{name}</h1>
-          <span>•</span>
+          {symbol && <span>•</span>}
           <h1>{symbol?.toUpperCase()}</h1>
         </STitleContainer>
         <STitleContainer>
-          <h1>
-            ${(market_data?.current_price as Currency)?.usd.toLocaleString()}
-          </h1>
+          {market_data?.current_price && (
+            <h1>
+              ${(market_data?.current_price as Currency)?.usd.toLocaleString()}
+            </h1>
+          )}
           {market_data?.price_change_percentage_24h && (
             <PercentageField
               perc={market_data?.price_change_percentage_24h as number}
