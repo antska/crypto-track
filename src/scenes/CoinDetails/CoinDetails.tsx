@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import ReactPlaceholder from 'react-placeholder';
+import parse from 'html-react-parser';
+import { MdExpandMore } from 'react-icons/md';
 
 import Layout from 'components/Layout';
 import { fetchCoinDetails, fetchCoinGraph } from 'store/coin/actions';
@@ -11,12 +14,15 @@ import {
   getCoinGraphDuration,
   getCoinGraphLoading,
 } from 'store/coin/selectors';
-import PercentageField from 'components/PercentageField';
 import Graph from './components/Graph';
-import DetailsHeaer from './components/DetailsHeader';
-// import DetailsBody from './components/DetailsBody';
-import { SBoxContainer } from './styled';
-import { CHANGE_PERCENTAGES } from '../../constants';
+import DetailsHeader from './components/DetailsHeader';
+import {
+  SBoxContainer,
+  SBoxTitle,
+  SDescription,
+  SMoreContainer,
+} from './styled';
+import CoinStatistics from './components/CoinStatistics';
 
 const CoinDetails = () => {
   const dispatch = useDispatch();
@@ -26,6 +32,7 @@ const CoinDetails = () => {
   const details = useSelector(getCoinDetails());
   const days = useSelector(getCoinGraphDuration());
   const { coin } = useParams<{ coin: string }>();
+  const [descriptionText, setDescriptionText] = useState('');
 
   useEffect(() => {
     dispatch(fetchCoinGraph({ coin, days }));
@@ -35,35 +42,51 @@ const CoinDetails = () => {
     dispatch(fetchCoinDetails({ coin }));
   }, []);
 
+  useEffect(() => {
+    if (details?.description.en) {
+      if (details?.description.en.length > 400) {
+        setDescriptionText(`${details.description.en.substr(0, 400)} ...`);
+      } else {
+        setDescriptionText(details.description.en);
+      }
+    }
+  }, [details?.description]);
+
+  const isExpandBtnVisible =
+    details?.description.en &&
+    details?.description.en.length > 400 &&
+    descriptionText.length !== details?.description.en.length;
+
   return (
     <Layout>
-      <DetailsHeaer />
+      <DetailsHeader />
       <Graph
         isGraphLoading={isGraphLoading || isDetailsLoading}
         data={graphData}
       />
       <SBoxContainer>
-        <h2>Description</h2>
-        <p
-          dangerouslySetInnerHTML={{ __html: details?.description.en ?? '' }}
-        />
+        <SBoxTitle>Description</SBoxTitle>
+        <ReactPlaceholder
+          type="text"
+          ready={!isDetailsLoading}
+          showLoadingAnimation
+          rows={10}
+          color="#E0E0E0"
+        >
+          <SDescription>{parse(descriptionText)}</SDescription>
+          {isExpandBtnVisible && (
+            <SMoreContainer
+              onClick={() => setDescriptionText(details?.description.en ?? '')}
+            >
+              <MdExpandMore size="1.5em" />
+              <span>More</span>
+            </SMoreContainer>
+          )}
+        </ReactPlaceholder>
       </SBoxContainer>
       <SBoxContainer>
-        <h2>Statistics</h2>
-        <div>
-          <table>
-            <tbody>
-              {CHANGE_PERCENTAGES.map((price) => (
-                <tr key={price.value}>
-                  <td>{price.name}</td>
-                  <PercentageField
-                    perc={details?.market_data[price.value] as number}
-                  />
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <SBoxTitle>Statistics</SBoxTitle>
+        <CoinStatistics />
       </SBoxContainer>
     </Layout>
   );

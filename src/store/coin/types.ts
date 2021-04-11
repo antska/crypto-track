@@ -20,8 +20,10 @@ type Links = {
 
 export type Currency = { [currency: string]: number };
 
+export type ATHLDate = { [currency: string]: string };
+
 type PriceChange = {
-  [key: string]: number | Currency;
+  [key: string]: number | Currency | ATHLDate;
 };
 
 export type Details = {
@@ -31,6 +33,10 @@ export type Details = {
   links: Links;
   image: { thumb: string; small: string; large: string };
   market_data: PriceChange;
+  sentiment_votes_up_percentage: number;
+  sentiment_votes_down_percentage: number;
+  community_data: { [key: string]: number };
+  developer_data: { [key: string]: number };
 };
 
 export interface CoinState {
