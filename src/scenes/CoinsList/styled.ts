@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import { queries } from '../../constants';
+
 export const STableWrapper = styled.div`
   background: ${({ theme }) => theme.palette.primary.ligth};
   border: 1px solid ${({ theme }) => theme.palette.primary.main};
@@ -9,6 +11,7 @@ export const STableWrapper = styled.div`
   box-sizing: border-box;
   padding: 10px;
   min-height: 100vh;
+  overflow-x: auto;
   width: 100%;
 `;
 
@@ -30,6 +33,29 @@ export const STable = styled.table`
 
   & tbody > tr:last-child > td {
     border-bottom: none;
+  }
+
+  @media all and (max-width: ${queries.mobileL}) {
+    td:nth-last-child(-n + 2),
+    th:nth-last-child(-n + 2) {
+      display: none;
+    }
+  }
+
+  @media all and (max-width: ${queries.tablet}) {
+    td,
+    th {
+      padding: 1rem 1rem;
+    }
+  }
+
+  @media all and (max-width: ${queries.laptop}) {
+    font-size: 0.75rem;
+
+    td,
+    th {
+      padding: 0.5rem 0.5rem;
+    }
   }
 `;
 

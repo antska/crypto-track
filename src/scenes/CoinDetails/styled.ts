@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { queries } from '../../constants';
 
 export const SBoxContainer = styled.div`
   background: white;
@@ -8,14 +9,25 @@ export const SBoxContainer = styled.div`
   box-sizing: border-box;
   margin-bottom: 3rem;
   padding: 30px;
+  overflow-x: auto;
   width: 100%;
+
+  @media all and (max-width: ${queries.tablet}) {
+    padding: 15px;
+  }
 `;
 
 export const SContainer = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: flex-start;
   gap: 1rem;
+
+  @media all and (max-width: ${queries.tablet}) {
+    gap: 3rem;
+    align-items: center;
+    flex-direction: column;
+  }
 `;
 
 export const STable = styled.table`
@@ -32,6 +44,10 @@ export const STable = styled.table`
     border-bottom: 1px solid ${({ theme }) => theme.palette.primary.main};
     padding: 1rem 1rem;
     text-align: left;
+  }
+
+  @media all and (max-width: ${queries.tablet}) {
+    width: 100%;
   }
 `;
 

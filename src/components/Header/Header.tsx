@@ -15,20 +15,22 @@ const SRightMenu = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  color: ${({ theme }) => theme.palette.primary.ligth};
 `;
 
 const SLink = styled(Link)`
-  text-decoration: none;
   font-size: 2rem;
   color: ${({ theme }) => theme.palette.primary.main};
+  text-decoration: none;
 `;
 
 const Header = () => (
   <SNav>
     <SLink to="/">CryptoTrack</SLink>
     <SRightMenu>
-      <span>Menu 1</span>
-      <span>Menu 2</span>
+      <span>en</span>
+      <span>USD($)</span>
     </SRightMenu>
   </SNav>
 );

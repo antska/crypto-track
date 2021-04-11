@@ -5,7 +5,7 @@ import HighchartsReact from 'highcharts-react-official';
 
 import { SBoxContainer } from 'scenes/CoinDetails/styled';
 import GraphRanges from './components/GraphRanges';
-import defaultOptions from './defaultOptions';
+import { priceGraphOptions } from '../../../../constants';
 
 interface Props {
   data: number[][];
@@ -17,7 +17,7 @@ const SWrapper = styled.div`
 `;
 
 const Graph = ({ data, isGraphLoading }: Props) => {
-  const [options, setOptions] = useState(defaultOptions);
+  const [options, setOptions] = useState(priceGraphOptions);
   const graphRef = useRef<{
     chart: Highcharts.Chart;
     container: RefObject<HTMLDivElement>;
@@ -39,7 +39,7 @@ const Graph = ({ data, isGraphLoading }: Props) => {
       series: [
         {
           type: 'area',
-          name: 'Bitcoin',
+          name: 'Value',
           color: '#0f748e',
           data,
           tooltip: {

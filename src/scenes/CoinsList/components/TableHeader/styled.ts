@@ -1,9 +1,14 @@
 import styled from 'styled-components';
+import { queries } from '../../../../constants';
 
 export const SH1 = styled.h1`
   margin: 0;
   text-transform: uppercase;
   color: ${({ theme }) => theme.palette.secondary.main};
+
+  @media all and (max-width: ${queries.mobileL}) {
+    font-size: 1rem;
+  }
 `;
 
 export const SSpan = styled.span`
@@ -38,6 +43,10 @@ export const SNavigation = styled.div`
       transition: background-color 600ms;
       background: ${({ theme }) => theme.palette.secondary.main};
       color: white;
+    }
+
+    @media all and (max-width: ${queries.mobileL}) {
+      padding: 1px;
     }
   }
 `;

@@ -7,19 +7,16 @@ import { useSelector } from 'react-redux';
 
 import { getCoinDetailsError } from 'store/coin/selectors';
 import { getHasErrorMarkets } from 'store/markets/selectors';
-
-const SContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  max-width: 64vw;
-  height: 100vh;
-`;
+import { queries } from '../../constants';
+import Layout from '../Layout';
 
 const SH1 = styled.h1`
+  margin-top: 10rem;
   font-size: 3rem;
+
+  @media all and (max-width: ${queries.tablet}) {
+    text-align: center;
+  }
 `;
 
 const SLink = styled(Link)`
@@ -49,14 +46,14 @@ const Error = () => {
   const errorMessage = coinError || marketsError;
 
   return (
-    <SContainer>
+    <Layout>
       <SH1>{errorMessage || 'NOTHING FOUND HERE :('}</SH1>
       <BsGraphDown size="7em" color="darkred" />
       <SLink to="/">
         <FaHome />
         GO HOME
       </SLink>
-    </SContainer>
+    </Layout>
   );
 };
 

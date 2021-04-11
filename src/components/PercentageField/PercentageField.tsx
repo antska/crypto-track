@@ -3,6 +3,8 @@ import { RiArrowUpSFill, RiArrowDownSFill } from 'react-icons/ri';
 import { VscDash } from 'react-icons/vsc';
 import styled from 'styled-components';
 
+import { queries } from '../../constants';
+
 interface Props {
   perc: number;
 }
@@ -12,6 +14,10 @@ const SPercentField = styled.div`
   justify-content: space-evenly;
   align-items: center;
   line-height: 1;
+
+  @media all and (max-width: ${queries.tablet}) {
+    justify-content: flex-end;
+  }
 `;
 
 const SPercValue = styled.div<{ color: string }>`

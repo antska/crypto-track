@@ -27,7 +27,7 @@ import {
 import { FETCH_INTERVAL_MS } from '../../constants';
 import TableHeader from './components/TableHeader';
 
-const headerNames = ['Name', 'Price (USD)', '24h High', '24h Low', '24h %'];
+const headerNames = ['Name', 'Price (USD)', '24h %', '24h High', '24h Low'];
 
 const CoinsList = () => {
   const dispatch = useDispatch();
@@ -90,11 +90,11 @@ const CoinsList = () => {
                   <SPriceField>
                     ${item.current_price.toLocaleString()}
                   </SPriceField>
-                  <td>${item.high_24h.toLocaleString()}</td>
-                  <td>${item.low_24h.toLocaleString()}</td>
                   <td>
                     <PercentageField perc={item.price_change_percentage_24h} />
                   </td>
+                  <td>${item.high_24h.toLocaleString()}</td>
+                  <td>${item.low_24h.toLocaleString()}</td>
                 </tr>
               ))
             ) : (

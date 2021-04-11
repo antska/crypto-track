@@ -19,6 +19,10 @@ const SMain = styled.main`
   width: 100%;
 
   @media screen and (min-width: ${queries.mobileS}) {
+    max-width: 84vw;
+  }
+
+  @media screen and (min-width: ${queries.laptop}) {
     max-width: 64vw;
   }
 `;
