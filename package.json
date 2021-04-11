@@ -60,6 +60,13 @@
       "pre-commit": "lint-staged"
     }
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/index.tsx",
+      "!src/reportWebVitals.ts"
+    ]
+  },
   "devDependencies": {
     "@types/dygraphs": "^2.1.2",
     "@types/jest": "^26.0.15",

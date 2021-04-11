@@ -18,6 +18,7 @@ const TableHeader = ({ page }: { page: number }) => {
       <SNavigation>
         {page < 2 ? (
           <Link
+            data-test="disabled-back-btn"
             to="/"
             style={{
               backgroundColor: '#DCDCDD',
@@ -29,11 +30,11 @@ const TableHeader = ({ page }: { page: number }) => {
           </Link>
         ) : (
           <Link to={`/markets/${page - 1}`}>
-            <IoIosArrowBack size="1.5em" />
+            <IoIosArrowBack data-test="back-btn" size="1.5em" />
           </Link>
         )}
         <Link to={`/markets/${page + 1}`}>
-          <IoIosArrowForward size="1.5em" />
+          <IoIosArrowForward data-test="forward-btn" size="1.5em" />
         </Link>
       </SNavigation>
     </SWrapper>

@@ -29,16 +29,23 @@ const PercentageField = ({ perc }: Props) => {
     switch (true) {
       case percVal > 0:
         return {
-          icon: <RiArrowUpSFill color="green" size="1.5em" />,
+          icon: (
+            <RiArrowUpSFill data-test="up-icon" color="green" size="1.5em" />
+          ),
           color: 'green',
         };
       case percVal < 0:
         return {
-          icon: <RiArrowDownSFill color="red" size="1.5em" />,
+          icon: (
+            <RiArrowDownSFill data-test="down-icon" color="red" size="1.5em" />
+          ),
           color: 'red',
         };
       default:
-        return { icon: <VscDash size="1.5em" />, color: '' };
+        return {
+          icon: <VscDash data-test="dash-icon" size="1.5em" />,
+          color: '',
+        };
     }
   };
 

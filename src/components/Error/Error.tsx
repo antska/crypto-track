@@ -1,7 +1,7 @@
 import React from 'react';
 import { BsGraphDown } from 'react-icons/bs';
 import styled from 'styled-components';
-import { FaHome } from 'react-icons/all';
+import { FaHome } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -47,9 +47,9 @@ const Error = () => {
 
   return (
     <Layout>
-      <SH1>{errorMessage || 'NOTHING FOUND HERE :('}</SH1>
+      <SH1 data-test="error-msg">{errorMessage || 'NOTHING FOUND HERE :('}</SH1>
       <BsGraphDown size="7em" color="darkred" />
-      <SLink to="/">
+      <SLink data-test="go-home" to="/">
         <FaHome />
         GO HOME
       </SLink>

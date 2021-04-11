@@ -74,7 +74,7 @@ const CoinsList = () => {
           <tbody>
             {!isLoading ? (
               coins.map((item, index) => (
-                <tr key={`row-${item.name}`}>
+                <tr key={`row-${item.name}`} data-test="coin-item-row">
                   <SNumber>{(currentPage - 1) * 50 + index + 1}</SNumber>
                   <td>
                     <SLink to={`/coins/${item.id}`}>

@@ -6,8 +6,8 @@ import {
   FaReddit,
   FaTelegram,
   FaTwitter,
-  MdForum,
-} from 'react-icons/all';
+} from 'react-icons/fa';
+import { MdForum } from 'react-icons/md';
 
 import { getCoinDetails } from 'store/coin/selectors';
 import PercentageField from 'components/PercentageField';
@@ -30,6 +30,7 @@ const DetailsHeader = () => {
       name: 'Homepage',
       icon: <FaHome size="1.5em" />,
       link: links?.homepage[0],
+      dataTest: 'homepage-link',
     },
     {
       name: 'Github',
@@ -52,6 +53,7 @@ const DetailsHeader = () => {
       link: links?.twitter_screen_name
         ? `https://twitter.com/${links?.twitter_screen_name}`
         : undefined,
+      dataTest: 'twitter-link',
     },
     {
       name: 'Telegram',
@@ -59,13 +61,14 @@ const DetailsHeader = () => {
       link: links?.telegram_channel_identifier
         ? `https://t.me/${links?.telegram_channel_identifier}`
         : undefined,
+      dataTest: 'telegram-link',
     },
   ];
 
   return (
     <SContainer>
       <SPriceContainer>
-        <STitleContainer>
+        <STitleContainer data-test="title-container">
           <img src={image?.small} alt={name} />
           <h1>{name}</h1>
           <span>•</span>
@@ -86,7 +89,11 @@ const DetailsHeader = () => {
         {linksArray.map(
           (linkObj) =>
             linkObj.link && (
-              <SLink key={linkObj.name} href={linkObj.link}>
+              <SLink
+                data-test={linkObj.dataTest}
+                key={linkObj.name}
+                href={linkObj.link}
+              >
                 {linkObj.icon}
                 <span>{linkObj.name}</span>
               </SLink>

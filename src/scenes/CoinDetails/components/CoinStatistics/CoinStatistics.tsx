@@ -109,7 +109,7 @@ const CoinStatistics = () => {
 
   return (
     <SContainer>
-      <STable>
+      <STable data-test="value-stats-table">
         <tbody>
           <tr>
             <th>Lowest 24h</th>
@@ -146,7 +146,7 @@ const CoinStatistics = () => {
         </tbody>
       </STable>
 
-      <STable>
+      <STable data-test="social-stats-table">
         <tbody>
           <tr>
             <th colSpan={2} style={{ textAlign: 'center' }}>
@@ -177,7 +177,7 @@ const CoinStatistics = () => {
           ))}
         </tbody>
       </STable>
-      <SChartContainer>
+      <SChartContainer data-test="reputation-graphs">
         <SH3>Reputation Score</SH3>
         <HighchartsReact
           highcharts={Highcharts}

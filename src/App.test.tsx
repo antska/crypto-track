@@ -6,7 +6,7 @@ describe('<App />', () => {
   it('will render the app', () => {
     render(<App />);
 
-    const baseText = screen.getByText(/Crypto Track App/i);
+    const baseText = screen.getByText(/CryptoTrack/i);
     expect(baseText).toBeInTheDocument();
   });
 });

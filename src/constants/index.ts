@@ -1,4 +1,19 @@
 import Highcharts from 'highcharts';
+import { DefaultTheme } from 'styled-components';
+
+export const theme: DefaultTheme = {
+  palette: {
+    primary: {
+      main: '#DCDCDD',
+      ligth: '#F5F5F5',
+      gray: '#C5C3C6',
+    },
+    secondary: {
+      main: '#4C5C68',
+      alt: '#11586A',
+    },
+  },
+};
 
 export const queries = {
   mobileS: '320px',

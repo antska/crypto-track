@@ -2,16 +2,13 @@ import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Provider as ReduxProvider } from 'react-redux';
-import {
-  createGlobalStyle,
-  ThemeProvider,
-  DefaultTheme,
-} from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import store from 'store';
 import Error from 'components/Error';
 import CoinsList from 'scenes/CoinsList';
 import CoinDetails from 'scenes/CoinDetails';
+import { theme } from './constants';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -33,20 +30,6 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
   }
 `;
-
-const theme: DefaultTheme = {
-  palette: {
-    primary: {
-      main: '#DCDCDD',
-      ligth: '#F5F5F5',
-      gray: '#C5C3C6',
-    },
-    secondary: {
-      main: '#4C5C68',
-      alt: '#11586A',
-    },
-  },
-};
 
 const App = () => (
   <ReduxProvider store={store}>

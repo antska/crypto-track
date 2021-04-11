@@ -48,7 +48,7 @@ const GraphRanges = () => {
   };
 
   return (
-    <SContainer>
+    <SContainer data-test="graph-ranges">
       {CHART_RANGES.map((range) => (
         <SButton
           key={range.name}

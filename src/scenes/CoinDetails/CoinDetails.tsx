@@ -86,10 +86,13 @@ const CoinDetails = () => {
           showLoadingAnimation
           rows={10}
         >
-          <SDescription>{parse(descriptionText)}</SDescription>
-          {isExpandBtnVisible && (
+          <SDescription data-test="description-block">
+            {parse(descriptionText)}
+          </SDescription>
+          {isExpandBtnVisible && details?.description.en && (
             <SMoreContainer
-              onClick={() => setDescriptionText(details?.description.en ?? '')}
+              data-test="expand-btn"
+              onClick={() => setDescriptionText(details?.description.en)}
             >
               <MdExpandMore size="1.5em" />
               <span>More</span>
