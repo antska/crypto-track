@@ -21,10 +21,6 @@ const SMain = styled.main`
   @media screen and (min-width: ${queries.mobileS}) {
     max-width: 64vw;
   }
-
-  @media screen and (min-width: ${queries.laptopL}) {
-    max-width: 84vw;
-  }
 `;
 
 const Layout = ({ children }: Props) => (

@@ -37,7 +37,9 @@ const PercentageField = ({ perc }: Props) => {
   };
 
   const percent = useMemo(() => getPercentage(perc), [perc]);
-  const percentFixedValue = useMemo(() => perc.toFixed(2), [perc]);
+  const percentFixedValue = useMemo(() => (perc ? perc.toFixed(2) : ''), [
+    perc,
+  ]);
 
   return (
     <SPercentField>

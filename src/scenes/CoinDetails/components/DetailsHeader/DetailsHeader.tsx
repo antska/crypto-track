@@ -73,7 +73,7 @@ const DetailsHeader = () => {
         </STitleContainer>
         <STitleContainer>
           <h1>
-            ${(market_data?.current_price as Currency).usd.toLocaleString()}
+            ${(market_data?.current_price as Currency)?.usd.toLocaleString()}
           </h1>
           {market_data?.price_change_percentage_24h && (
             <PercentageField

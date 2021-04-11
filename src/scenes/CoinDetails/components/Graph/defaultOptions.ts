@@ -18,6 +18,9 @@ const defaultOptions: Highcharts.Options = {
   legend: {
     enabled: false,
   },
+  credits: {
+    enabled: false,
+  },
   plotOptions: {
     area: {
       fillColor: {
