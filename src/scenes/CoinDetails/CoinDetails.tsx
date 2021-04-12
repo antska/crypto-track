@@ -40,14 +40,17 @@ const CoinDetails = () => {
   const { coin } = useParams<{ coin: string }>();
   const [descriptionText, setDescriptionText] = useState('');
 
+  // fetch coin graph data (based on days/currency)
   useEffect(() => {
     dispatch(fetchCoinGraph({ coin, days, currency: currency.name }));
   }, [days, currency.name]);
 
+  // fetch coin details
   useEffect(() => {
     dispatch(fetchCoinDetails({ coin }));
   }, []);
 
+  // update description text based on text length
   useEffect(() => {
     if (details?.description.en) {
       if (details?.description.en.length > 400) {

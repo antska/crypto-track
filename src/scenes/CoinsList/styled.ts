@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { queries } from '../../constants';
+import { QUERIES } from 'constants/index';
 
 export const STableWrapper = styled.div`
   background: ${({ theme }) => theme.palette.primary.light};
@@ -35,21 +35,22 @@ export const STable = styled.table`
     border-bottom: none;
   }
 
-  @media all and (max-width: ${queries.mobileL}) {
+  // hide the last 2 columns on small screens
+  @media all and (max-width: ${QUERIES.mobileL}) {
     td:nth-last-child(-n + 2),
     th:nth-last-child(-n + 2) {
       display: none;
     }
   }
 
-  @media all and (max-width: ${queries.tablet}) {
+  @media all and (max-width: ${QUERIES.tablet}) {
     td,
     th {
       padding: 1rem 1rem;
     }
   }
 
-  @media all and (max-width: ${queries.laptop}) {
+  @media all and (max-width: ${QUERIES.laptop}) {
     font-size: 0.75rem;
 
     td,

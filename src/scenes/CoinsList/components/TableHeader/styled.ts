@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-import { queries } from '../../../../constants';
+
+import { QUERIES } from 'constants/index';
 
 export const SH1 = styled.h1`
   margin: 0;
   text-transform: uppercase;
   color: ${({ theme }) => theme.palette.secondary.main};
 
-  @media all and (max-width: ${queries.mobileL}) {
+  @media all and (max-width: ${QUERIES.mobileL}) {
     font-size: 1rem;
   }
 `;
@@ -45,7 +46,7 @@ export const SNavigation = styled.div`
       color: white;
     }
 
-    @media all and (max-width: ${queries.mobileL}) {
+    @media all and (max-width: ${QUERIES.mobileL}) {
       padding: 1px;
     }
   }

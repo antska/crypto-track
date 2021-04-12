@@ -7,7 +7,7 @@ import { renderWithRedux } from 'utils/testing';
 import TableHeader from './TableHeader';
 
 describe('<TableHeader />', () => {
-  it('will render the last updated date', () => {
+  it('will render the last updated date on the header', () => {
     renderWithRedux(
       <BrowserRouter>
         <TableHeader page={3} />
@@ -48,7 +48,7 @@ describe('<TableHeader />', () => {
     expect(window.location.pathname).toEqual('/markets/1');
   });
 
-  it('will have back button disabled', () => {
+  it('will have back button disabled on 1st page', () => {
     renderWithRedux(
       <BrowserRouter>
         <TableHeader page={1} />

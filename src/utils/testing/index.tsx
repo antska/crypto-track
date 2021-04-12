@@ -1,14 +1,13 @@
 import React from 'react';
-
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { ThemeProvider } from 'styled-components';
+import axios from 'axios';
 
 import { rootReducer } from 'store';
-import axios from 'axios';
-import { lightTheme } from '../../constants';
+import { lightTheme } from 'constants/theme';
 
 export const renderWithRedux = (
   ui: React.ReactElement,

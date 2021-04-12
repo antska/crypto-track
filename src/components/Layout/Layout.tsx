@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { queries } from '../../constants';
+import { QUERIES } from 'constants/index';
 import Header from '../Header';
 
 interface Props {
@@ -18,11 +18,11 @@ const SMain = styled.main`
   min-height: calc(100vh - 40px);
   width: 100%;
 
-  @media screen and (min-width: ${queries.mobileS}) {
+  @media screen and (min-width: ${QUERIES.mobileS}) {
     max-width: 84vw;
   }
 
-  @media screen and (min-width: ${queries.laptop}) {
+  @media screen and (min-width: ${QUERIES.laptop}) {
     max-width: 64vw;
   }
 `;

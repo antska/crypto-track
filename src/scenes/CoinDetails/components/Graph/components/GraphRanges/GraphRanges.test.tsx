@@ -6,8 +6,8 @@ import { renderWithRedux } from 'utils/testing';
 import initialState from 'store/coin/initialState';
 import { State } from 'store/coin/types';
 import * as actions from 'store/coin/actions';
+import { CHART_RANGES } from 'constants/index';
 import GraphRanges from './GraphRanges';
-import { CHART_RANGES } from '../../../../../../constants';
 
 const renderGraphRanges = (state: State = initialState) =>
   renderWithRedux(<GraphRanges />, {

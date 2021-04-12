@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "author": "Antonis Skandalis",
-  "description": "Cryptocurrency track dashboard in React",
+  "description": "Cryptocurrency track dashboard in React+Typescript",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -68,7 +68,6 @@
     ]
   },
   "devDependencies": {
-    "@types/dygraphs": "^2.1.2",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",

@@ -1,8 +1,8 @@
 import { Dispatch } from 'redux';
 import axios from 'axios';
 
+import { BASE_API_ENDPOINT } from 'constants/index';
 import * as types from './actionTypes';
-import { BASE_API_ENDPOINT } from '../../constants';
 
 type FetchParams = {
   coin: string;
@@ -29,7 +29,10 @@ export const fetchCoinGraph = ({
     );
 
     if (response.status !== 200) {
-      throw new Error(`${response.status} ${response.statusText}`);
+      dispatch({
+        type: types.GET_COIN_GRAPH_FAILED,
+        error: response.statusText,
+      });
     }
 
     dispatch({
@@ -54,7 +57,10 @@ export const fetchCoinDetails = ({ coin }: Pick<FetchParams, 'coin'>) => async (
     response = await axios.get(`${BASE_API_ENDPOINT}/coins/${coin}`);
 
     if (response.status !== 200) {
-      throw new Error(`${response.status} ${response.statusText}`);
+      dispatch({
+        type: types.GET_COIN_DETAILS_FAILED,
+        error: response.statusText,
+      });
     }
 
     dispatch({

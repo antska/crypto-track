@@ -18,7 +18,7 @@ const renderDetailsHeader = (state: State = initialState) =>
   );
 
 describe('<DetailsHeader />', () => {
-  it('will render header with no data', () => {
+  it('will render header with title', () => {
     renderDetailsHeader();
 
     expect(screen.getByTestId('title-container')).toBeInTheDocument();

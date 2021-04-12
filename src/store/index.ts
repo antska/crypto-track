@@ -11,12 +11,10 @@ export const rootReducer = combineReducers({ coin, markets, global });
 
 export const history = createBrowserHistory();
 
-export type RootState = ReturnType<typeof rootReducer>;
-
 /* istanbul ignore next */
 const composeEnhancers =
   process.env.NODE_ENV === 'development'
-    ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
     : compose;
 
 const enhancer = composeEnhancers(applyMiddleware(thunk));

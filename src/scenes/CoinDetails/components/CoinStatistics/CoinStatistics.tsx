@@ -15,9 +15,9 @@ import { getCurrency, getTheme } from 'store/global/selectors';
 import {
   CHANGE_PERCENTAGES,
   DEVELOPER_STATS,
-  gaugeOptions,
   SOCIAL_STATS,
-} from '../../../../constants';
+} from 'constants/index';
+import { gaugeOptions } from 'constants/options';
 
 highchartsMore(Highcharts);
 solidGauge(Highcharts);
@@ -46,6 +46,7 @@ const CoinStatistics = () => {
   const currency = useSelector(getCurrency());
   const theme = useSelector(getTheme());
 
+  // set prices to locale format
   const athPrice =
     (details?.market_data?.ath as Currency)?.[
       currency.name
@@ -63,6 +64,7 @@ const CoinStatistics = () => {
       currency.name
     ]?.toLocaleString() ?? '';
 
+  // set dates to nice format
   const athPriceDate = useMemo(
     () =>
       moment(
@@ -79,6 +81,7 @@ const CoinStatistics = () => {
     [details],
   );
 
+  // set charts options
   useEffect(() => {
     const bgColor = theme === 'light' ? '#F5F5F5' : '#464646';
     const textColor = theme === 'light' ? '#464646' : 'white';

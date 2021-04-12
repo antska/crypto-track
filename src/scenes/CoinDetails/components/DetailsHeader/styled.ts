@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { queries } from '../../../../constants';
+import { QUERIES } from 'constants/index';
 
 export const STitleContainer = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ export const SPriceContainer = styled.div`
   justify-content: space-between;
   gap: 1rem;
 
-  @media all and (max-width: ${queries.mobileL}) {
+  @media all and (max-width: ${QUERIES.mobileL}) {
     align-items: normal;
     width: 100%;
   }
@@ -35,7 +35,7 @@ export const SContainer = styled.div`
   margin: 20px auto;
   width: 100%;
 
-  @media all and (max-width: ${queries.mobileL}) {
+  @media all and (max-width: ${QUERIES.mobileL}) {
     align-items: flex-start;
     flex-direction: column;
   }
@@ -49,7 +49,7 @@ export const SSocial = styled.div`
   color: ${({ theme }) => theme.palette.secondary.main};
   font-size: 0.85rem;
 
-  @media all and (max-width: ${queries.mobileL}) {
+  @media all and (max-width: ${QUERIES.mobileL}) {
     grid-template-columns: repeat(3, 1fr);
   }
 `;

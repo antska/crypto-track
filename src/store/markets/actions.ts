@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
+import moment from 'moment';
 
+import { BASE_API_ENDPOINT } from 'constants/index';
 import * as types from './actionTypes';
-import { BASE_API_ENDPOINT } from '../../constants';
 
 export const fetchMarketsList = ({
   page,
@@ -20,13 +21,16 @@ export const fetchMarketsList = ({
     );
 
     if (response.status !== 200) {
-      throw new Error(`${response.status} ${response.statusText}`);
+      dispatch({
+        type: types.GET_MARKETS_LIST_FAILED,
+        error: response.statusText,
+      });
     }
 
     dispatch({
       type: types.GET_MARKETS_LIST_SUCCESS,
       data: response.data,
-      timestamp: new Date().toString().split('GMT')[0],
+      timestamp: moment().format('MMMM Do YYYY, HH:MM:SS'),
     });
   } catch (err) {
     dispatch({

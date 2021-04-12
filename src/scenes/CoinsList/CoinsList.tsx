@@ -15,6 +15,7 @@ import {
 import PercentageField from 'components/PercentageField';
 import SEO from 'components/SEO';
 import { getCurrency } from 'store/global/selectors';
+import { FETCH_INTERVAL_MS } from 'constants/index';
 import {
   SImage,
   SLink,
@@ -26,7 +27,6 @@ import {
   STable,
   STableWrapper,
 } from './styled';
-import { FETCH_INTERVAL_MS } from '../../constants';
 import TableHeader from './components/TableHeader';
 
 const headerNames = ['Name', 'Price (USD)', '24h %', '24h High', '24h Low'];
@@ -45,6 +45,7 @@ const CoinsList = () => {
     dispatch(fetchMarketsList({ page: pageNum, currency: curr }));
   }, []);
 
+  // fetch coin list data in intervals
   useEffect(() => {
     const interval = setInterval(
       () => fetchData(currentPage, currency.name),
@@ -56,6 +57,7 @@ const CoinsList = () => {
     };
   }, [currentPage, currency.name]);
 
+  // fetch coin list data when page or currency changes
   useEffect(() => {
     fetchData(currentPage, currency.name);
   }, [currentPage, currency.name]);
@@ -82,6 +84,7 @@ const CoinsList = () => {
             {!isLoading ? (
               coins.map((item, index) => (
                 <tr key={`row-${item.name}`} data-test="coin-item-row">
+                  {/* correctly add counting based on current page and per page results */}
                   <SNumber>{(currentPage - 1) * 50 + index + 1}</SNumber>
                   <td>
                     <SLink to={`/coins/${item.id}`}>

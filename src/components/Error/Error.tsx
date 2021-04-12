@@ -8,14 +8,14 @@ import { useSelector } from 'react-redux';
 import { getCoinDetailsError } from 'store/coin/selectors';
 import { getHasErrorMarkets } from 'store/markets/selectors';
 import SEO from 'components/SEO';
-import { queries } from '../../constants';
+import { QUERIES } from 'constants/index';
 import Layout from '../Layout';
 
 const SH1 = styled.h1`
   margin-top: 10rem;
   font-size: 3rem;
 
-  @media all and (max-width: ${queries.tablet}) {
+  @media all and (max-width: ${QUERIES.tablet}) {
     text-align: center;
   }
 `;
@@ -35,7 +35,7 @@ const SLink = styled(Link)`
 
   &:hover {
     color: white;
-    background: ${({ theme }) => theme.palette.secondary.alt};
+    background: ${({ theme }) => theme.colors.coral};
     border: none;
   }
 `;

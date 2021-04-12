@@ -59,7 +59,7 @@ describe('<CoinsList />', () => {
     expect(window.location.pathname).toEqual('/error');
   });
 
-  it('will request for data again after an interval', async () => {
+  it('will request for data again after an interval', () => {
     jest.useFakeTimers();
     jest.spyOn(actions, 'fetchMarketsList');
 

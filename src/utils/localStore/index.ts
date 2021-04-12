@@ -1,9 +1,10 @@
-const KEY = 'cryptotrack';
+import { LOCALSTORAGE_KEY } from 'constants/index';
+import { State } from 'store/global/types';
 
 export default {
   loadState() {
     try {
-      const serializedState = localStorage.getItem(KEY);
+      const serializedState = localStorage.getItem(LOCALSTORAGE_KEY);
       if (serializedState === null) {
         return undefined;
       }
@@ -12,7 +13,7 @@ export default {
       return undefined;
     }
   },
-  saveState(state: any) {
-    localStorage.setItem(KEY, JSON.stringify(state));
+  saveState(state: { global: State | undefined }) {
+    localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(state));
   },
 };

@@ -1,19 +1,18 @@
 # Crypto Track App
 
----
-
 A React+Typescript based SPA to track cryptocurrencies and observe price changes
 along with price chart and general statistics.
 
 ## Demo - Screens
 
----
-
+### desktop version
 ![Crypto track demo](./crypto-track-demo.gif)
 
-## Description
+### mobile version
+![Crypto track mobile demo 1](./crypto-track-mobile1.png)
+![Crypto track mobile demo 2](./crypto-track-mobile2.png)
 
----
+## Description
 
 CryptoTrack app has been developed in React framework with Typescript,
 using [Styled Components](https://styled-components.com/), [Redux](https://redux.js.org/) and [React Hooks](https://reactjs.org/docs/hooks-intro.html).
@@ -49,8 +48,6 @@ In addition, the following features have been implemented:
 
 ## Project structure
 
----
-
     .
     ├── src
     |   |── components                  # generic components used
@@ -82,7 +79,7 @@ In addition, the following features have been implemented:
     |   |── ...
     |   ├── ...
     |   |
-    │   README.md                       # README file.
+    │   README.md                       # README file
     |   .eslintrc                       # eslint conf
     |   .prettierrc                     # prettier conf
     |   package.json                    # package.json

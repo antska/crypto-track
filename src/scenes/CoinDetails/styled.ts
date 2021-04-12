@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { queries } from '../../constants';
+
+import { QUERIES } from 'constants/index';
 
 export const SBoxContainer = styled.div`
   background: ${({ theme }) => theme.palette.primary.light};
@@ -12,7 +13,7 @@ export const SBoxContainer = styled.div`
   overflow-x: auto;
   width: 100%;
 
-  @media all and (max-width: ${queries.tablet}) {
+  @media all and (max-width: ${QUERIES.tablet}) {
     padding: 15px;
   }
 `;
@@ -23,7 +24,7 @@ export const SContainer = styled.div`
   align-items: flex-start;
   gap: 1rem;
 
-  @media all and (max-width: ${queries.tablet}) {
+  @media all and (max-width: ${QUERIES.tablet}) {
     gap: 3rem;
     align-items: center;
     flex-direction: column;
@@ -42,7 +43,7 @@ export const STable = styled.table`
     > div {
       justify-content: space-evenly;
 
-      @media all and (max-width: ${queries.tablet}) {
+      @media all and (max-width: ${QUERIES.tablet}) {
         justify-content: flex-end;
       }
     }
@@ -54,7 +55,7 @@ export const STable = styled.table`
     text-align: left;
   }
 
-  @media all and (max-width: ${queries.tablet}) {
+  @media all and (max-width: ${QUERIES.tablet}) {
     width: 100%;
   }
 `;

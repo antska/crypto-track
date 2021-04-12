@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import { getTheme } from 'store/global/selectors';
-import { CustomTheme, darkTheme, lightTheme } from '../../constants';
+import { CustomTheme, darkTheme, lightTheme } from 'constants/theme';
 
 const GlobalStyle = createGlobalStyle`
   html {

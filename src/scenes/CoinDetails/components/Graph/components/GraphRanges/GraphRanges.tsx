@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getCoinGraphDuration } from 'store/coin/selectors';
 import { setGraphDuration } from 'store/coin/actions';
-import { CHART_RANGES } from '../../../../../../constants';
+import { CHART_RANGES } from 'constants/index';
 
 const SContainer = styled.div`
   display: flex;

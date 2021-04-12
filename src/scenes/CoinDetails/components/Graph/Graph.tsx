@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 
 import { SBoxContainer } from 'scenes/CoinDetails/styled';
 import { getCurrency, getTheme } from 'store/global/selectors';
+import { priceGraphOptions } from 'constants/options';
 import GraphRanges from './components/GraphRanges';
-import { priceGraphOptions } from '../../../../constants';
 
 interface Props {
   data: number[][];
@@ -27,6 +27,7 @@ const Graph = ({ data, isGraphLoading }: Props) => {
     container: RefObject<HTMLDivElement>;
   }>(null);
 
+  // show/hide loading indicator on graph but updating its state
   useEffect(() => {
     if (graphRef && graphRef.current) {
       if (isGraphLoading) {
@@ -37,6 +38,7 @@ const Graph = ({ data, isGraphLoading }: Props) => {
     }
   }, [graphRef, isGraphLoading]);
 
+  // set graph options
   useEffect(() => {
     const bgColor = theme === 'light' ? '#F5F5F5' : '#464646';
     const textColor = theme === 'light' ? '#464646' : 'white';
