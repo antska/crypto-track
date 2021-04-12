@@ -1,46 +1,141 @@
-# Getting Started with Create React App
+# Crypto Track App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+A React+Typescript based SPA to track cryptocurrencies and observe price changes
+along with price chart and general statistics.
 
-In the project directory, you can run:
+## Demo - Screens
 
-### `yarn start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![Crypto track demo](./crypto-track-demo.gif)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Description
 
-### `yarn test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+CryptoTrack app has been developed in React framework with Typescript,
+using [Styled Components](https://styled-components.com/), [Redux](https://redux.js.org/) and [React Hooks](https://reactjs.org/docs/hooks-intro.html).
+It consumes the external API of [CoinGecko](https://www.coingecko.com/en/api).
 
-### `yarn build`
+The basic functionalities are the following:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+*  Listing all the available cryptocurrencies in paginated view with the following info:
+    * name
+    * symbol
+    * current price
+    * highest price in the last 24 hours
+    * lower price in the last 24 hours
+    * price change in percentage of the last 24 hours
+*   Accessing details of a specific crypto in a separate page, eg:
+    * Current price
+    * Coin Graph
+    * Price changes
+    * Description
+    * Reputation score
+    * Statistics (social, developer, price changes)
+*   Redirect to error page if something goes wrong.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+In addition, the following features have been implemented:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Change of currency between USD($) and EURO(€)
+* Change of theme between dark and light
+* Fetching crypto list in interval of 30sec
+* Skeleton ui overlay while loading data
+* Responsive layout (mobile, tablet, laptop, big screens)
+* Unit testing with RTL
+* SEO integration & accessibility rules applied
 
-### `yarn eject`
+## Project structure
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    .
+    ├── src
+    |   |── components                  # generic components used
+    |   |   |──  Layout                 # component folder
+    |   |   |    |── Layout.tsx         # main component
+    |   |   |    |── index.ts           # index file of component
+    |   |   |    |── styled.ts          # styled components file
+    |   |   |── ...
+    |   |── screens                     # screens of the app
+    |   |   |──  CoinsList              # component folder
+    |   |   |    |── components         # child components
+    |   |   |        |──  Layout        # child component folder
+    |   |   |        |──  ...           
+    |   |   |    |── CoinsList.tsx      # main component
+    |   |   |    |── CoinsList.test.tsx # unit test file
+    |   |   |    |── index.ts           # index file of component
+    |   |   |    |── styled.ts          # styled components file
+    |   |   |── ...
+    |   |── store                       # redux store, reducers, actions,...
+    |   |   |── ...
+    |   |── constants                   # constants folder
+    |   |   |── ...  
+    |   |── utils                       # utils folder
+    |   |   |── testing                 # testing folder
+    |   |   |── localStore              # localStore folder
+    |   |── App.tsx                     # main App
+    |   |── App.test.tsx                # main App test file
+    |   |── index.tsx                   # index.tsx init file
+    |   |── ...
+    |   ├── ...
+    |   |
+    │   README.md                       # README file.
+    |   .eslintrc                       # eslint conf
+    |   .prettierrc                     # prettier conf
+    |   package.json                    # package.json
+    └── ...
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+> [React-icons](https://react-icons.github.io/react-icons/) package is used for icons styling.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+#### Technologies Used
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+In this project, **React** v17.0.2 was used with **Typescript** along with [Redux](https://redux.js.org/),
+implementing [Hooks](https://react-redux.js.org/next/api/hooks).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The basic idea is to use a store that handles a global state (for theme and currency) and 2 separate states: one for coin details, and the other for coins list.
+It uses actions, reducers and a middleware(**thunk**) in order to utilize API fetch calls as actions. On top of that, selectors are being used as well in order to access state easily.
+
+To help with the **immutability**, [immerjs](https://immerjs.github.io/immer/) library is used. 
+
+Controlling the **loading** state, [react-placeholder](https://github.com/buildo/react-placeholder) library is used 
+to show skeletons ui elements in the table of coin list and in coin details sections.
+
+For the application's charts, [HighCharts](https://www.highcharts.com/docs/index) library (with a react-wrapper helper) was used to have interactive charts in coin details page.
+
+#### Styled Components - Responsive layout
+
+Regarding the styles used, the methodology in this project is to have a styled.ts file 
+that will contain the styles of the current component. If the styles are limited to 1-3 per component,
+then they are being place inside the component itself.
+
+In order to have responsive layout of the whole app, CSS Grid and Flex Layout has
+been used across the application, along with a queries constant that has device specific
+widths for media queries.
+
+### Testing with [Jest](https://jestjs.io/) & [React Testing Library](https://testing-library.com/)
+
+Unit tests are created along with the component in a .test.ts* file. The coverage of the app is <span style="color:green">**~100%**</span>
+
+### Installation
+
+``git clone https://github.com/antska/crypto-track.git``
+
+``cd crypto-track``
+
+``yarn install``
+
+``yarn start``
+
+### Running the tests
+
+``cd crypto-track``
+
+``yarn test``
+
+``yarn lint`` (optionally)
+
+

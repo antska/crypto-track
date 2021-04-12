@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
 import { getTheme } from 'store/global/selectors';
-import { queries } from '../../constants';
 
 interface Props {
   perc: number;
@@ -13,13 +12,8 @@ interface Props {
 
 const SPercentField = styled.div`
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
   line-height: 1;
-
-  @media all and (max-width: ${queries.tablet}) {
-    justify-content: flex-end;
-  }
 `;
 
 const SPercValue = styled.div<{ color: string }>`

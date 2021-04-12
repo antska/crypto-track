@@ -38,6 +38,14 @@ export const STable = styled.table`
     border-bottom: 1px solid ${({ theme }) => theme.palette.primary.main};
     padding: 1rem 1rem;
     text-align: end;
+
+    > div {
+      justify-content: space-evenly;
+
+      @media all and (max-width: ${queries.tablet}) {
+        justify-content: flex-end;
+      }
+    }
   }
 
   & th {
