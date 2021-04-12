@@ -3,7 +3,9 @@ import { RiArrowUpSFill, RiArrowDownSFill } from 'react-icons/ri';
 import { VscDash } from 'react-icons/vsc';
 import styled from 'styled-components';
 
+import { useSelector } from 'react-redux';
 import { queries } from '../../constants';
+import { getTheme } from '../../store/global/selectors';
 
 interface Props {
   perc: number;
@@ -25,14 +27,17 @@ const SPercValue = styled.div<{ color: string }>`
 `;
 
 const PercentageField = ({ perc }: Props) => {
+  const theme = useSelector(getTheme());
+  const upColor = theme === 'light' ? 'green' : 'lawngreen';
+
   const getPercentage = (percVal: number) => {
     switch (true) {
       case percVal > 0:
         return {
           icon: (
-            <RiArrowUpSFill data-test="up-icon" color="green" size="1.5em" />
+            <RiArrowUpSFill data-test="up-icon" color={upColor} size="1.5em" />
           ),
-          color: 'green',
+          color: upColor,
         };
       case percVal < 0:
         return {
@@ -49,7 +54,7 @@ const PercentageField = ({ perc }: Props) => {
     }
   };
 
-  const percent = useMemo(() => getPercentage(perc), [perc]);
+  const percent = useMemo(() => getPercentage(perc), [perc, theme]);
   const percentFixedValue = useMemo(() => (perc ? perc.toFixed(2) : ''), [
     perc,
   ]);

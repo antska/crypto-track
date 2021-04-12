@@ -1,38 +1,47 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { BiDollar, BiEuro } from 'react-icons/bi';
 
-const SNav = styled.nav`
-  background-color: ${({ theme }) => theme.palette.secondary.main};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 50px;
-  padding: 20px 20px;
-`;
+import { setCurrency, setTheme } from 'store/global/actions';
+import { getCurrency, getTheme } from 'store/global/selectors';
+import { SIconMoon, SIconSun, SLink, SNav, SRightMenu } from './styled';
 
-const SRightMenu = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+const Header = () => {
+  const dispatch = useDispatch();
+  const currency = useSelector(getCurrency());
+  const theme = useSelector(getTheme());
 
-  color: ${({ theme }) => theme.palette.primary.ligth};
-`;
+  const handleChangeCurrency = () => {
+    dispatch(
+      setCurrency(
+        currency.name === 'usd'
+          ? { name: 'eur', symbol: '€' }
+          : { name: 'usd', symbol: '$' },
+      ),
+    );
+  };
 
-const SLink = styled(Link)`
-  font-size: 2rem;
-  color: ${({ theme }) => theme.palette.primary.main};
-  text-decoration: none;
-`;
+  const handleChangeTheme = () => {
+    dispatch(setTheme(theme === 'light' ? 'dark' : 'light'));
+  };
 
-const Header = () => (
-  <SNav>
-    <SLink to="/">CryptoTrack</SLink>
-    <SRightMenu>
-      <span>en</span>
-      <span>USD($)</span>
-    </SRightMenu>
-  </SNav>
-);
+  return (
+    <SNav>
+      <SLink to="/">CryptoTrack</SLink>
+      <SRightMenu>
+        {currency.name === 'usd' ? (
+          <BiDollar size="1.5em" onClick={handleChangeCurrency} />
+        ) : (
+          <BiEuro size="1.5em" onClick={handleChangeCurrency} />
+        )}
+        {theme === 'light' ? (
+          <SIconSun size="1.5em" onClick={handleChangeTheme} />
+        ) : (
+          <SIconMoon size="1.5em" onClick={handleChangeTheme} />
+        )}
+      </SRightMenu>
+    </SNav>
+  );
+};
 
 export default Header;

@@ -7,6 +7,7 @@ import { BASE_API_ENDPOINT } from '../../constants';
 type FetchParams = {
   coin: string;
   days?: string | number;
+  currency: string;
 };
 
 export const setGraphDuration = (duration: string | number) => ({
@@ -14,15 +15,17 @@ export const setGraphDuration = (duration: string | number) => ({
   duration,
 });
 
-export const fetchCoinGraph = ({ coin, days = 'max' }: FetchParams) => async (
-  dispatch: Dispatch,
-) => {
+export const fetchCoinGraph = ({
+  coin,
+  days = 'max',
+  currency,
+}: FetchParams) => async (dispatch: Dispatch) => {
   dispatch({ type: types.GET_COIN_GRAPH_REQUEST });
   let response;
 
   try {
     response = await axios.get(
-      `${BASE_API_ENDPOINT}/coins/${coin}/market_chart?vs_currency=usd&days=${days}`,
+      `${BASE_API_ENDPOINT}/coins/${coin}/market_chart?vs_currency=${currency}&days=${days}`,
     );
 
     if (response.status !== 200) {

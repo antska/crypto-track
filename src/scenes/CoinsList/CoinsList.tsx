@@ -14,6 +14,7 @@ import {
 } from 'store/markets/selectors';
 import PercentageField from 'components/PercentageField';
 import SEO from 'components/SEO';
+import { getCurrency } from 'store/global/selectors';
 import {
   SImage,
   SLink,
@@ -34,26 +35,30 @@ const CoinsList = () => {
   const dispatch = useDispatch();
   const coins = useSelector(getCoinMarketsList());
   const error = useSelector(getHasErrorMarkets());
+  const currency = useSelector(getCurrency());
   const isLoading = useSelector(getIsLoadingMarkets());
   const { page } = useParams<{ page: string }>();
 
   const currentPage = page ? Number.parseInt(page, 10) : 1;
 
-  const fetchData = useCallback((pageNum: number) => {
-    dispatch(fetchMarketsList({ page: pageNum }));
+  const fetchData = useCallback((pageNum: number, curr: string) => {
+    dispatch(fetchMarketsList({ page: pageNum, currency: curr }));
   }, []);
 
   useEffect(() => {
-    fetchData(currentPage);
     const interval = setInterval(
-      () => fetchData(currentPage),
+      () => fetchData(currentPage, currency.name),
       FETCH_INTERVAL_MS,
     );
 
     return () => {
       clearInterval(interval);
     };
-  }, [currentPage]);
+  }, [currentPage, currency.name]);
+
+  useEffect(() => {
+    fetchData(currentPage, currency.name);
+  }, [currentPage, currency.name]);
 
   if (error) {
     return <Redirect to="/error" />;
@@ -90,13 +95,20 @@ const CoinsList = () => {
                     </SLink>
                   </td>
                   <SPriceField>
-                    ${item?.current_price?.toLocaleString()}
+                    {currency.symbol}
+                    {item?.current_price?.toLocaleString()}
                   </SPriceField>
                   <td>
                     <PercentageField perc={item?.price_change_percentage_24h} />
                   </td>
-                  <td>${item?.high_24h?.toLocaleString()}</td>
-                  <td>${item?.low_24h?.toLocaleString()}</td>
+                  <td>
+                    {currency.symbol}
+                    {item?.high_24h?.toLocaleString()}
+                  </td>
+                  <td>
+                    {currency.symbol}
+                    {item?.low_24h?.toLocaleString()}
+                  </td>
                 </tr>
               ))
             ) : (

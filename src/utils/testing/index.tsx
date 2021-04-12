@@ -8,7 +8,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { rootReducer } from 'store';
 import axios from 'axios';
-import { theme } from '../../constants';
+import { lightTheme } from '../../constants';
 
 export const renderWithRedux = (
   ui: React.ReactElement,
@@ -21,7 +21,7 @@ export const renderWithRedux = (
 ) => {
   const Wrapper: React.FC = ({ children }: { children?: React.ReactNode }) => (
     <Provider store={store}>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <ThemeProvider theme={lightTheme}>{children}</ThemeProvider>
     </Provider>
   );
   return render(ui, { wrapper: Wrapper, ...renderOptions });

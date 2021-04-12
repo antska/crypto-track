@@ -1,13 +1,15 @@
 import React from 'react';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { getLastUpdated } from 'store/markets/selectors';
+import { getTheme } from 'store/global/selectors';
 import { SH1, SNavigation, SSpan, SWrapper } from './styled';
 
 const TableHeader = ({ page }: { page: number }) => {
   const lastUpdated = useSelector(getLastUpdated());
+  const theme = useSelector(getTheme());
 
   return (
     <SWrapper>
@@ -21,7 +23,7 @@ const TableHeader = ({ page }: { page: number }) => {
             data-test="disabled-back-btn"
             to="/"
             style={{
-              backgroundColor: '#DCDCDD',
+              backgroundColor: theme === 'light' ? '#DCDCDD' : '#656567',
               pointerEvents: 'none',
               color: 'gray',
             }}

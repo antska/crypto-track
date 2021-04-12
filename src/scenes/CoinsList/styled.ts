@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { queries } from '../../constants';
 
 export const STableWrapper = styled.div`
-  background: ${({ theme }) => theme.palette.primary.ligth};
+  background: ${({ theme }) => theme.palette.primary.light};
   border: 1px solid ${({ theme }) => theme.palette.primary.main};
   border-radius: 10px;
   box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
@@ -21,12 +21,12 @@ export const STable = styled.table`
   width: 100%;
 
   & td {
-    border-bottom: 1px solid ${({ theme }) => theme.palette.primary.main};
+    border-bottom: 1px solid ${({ theme }) => theme.palette.primary.gray};
     padding: 1rem 2rem;
   }
 
   & th {
-    border-bottom: 2px solid ${({ theme }) => theme.palette.primary.main};
+    border-bottom: 2px solid ${({ theme }) => theme.palette.primary.gray};
     padding: 1rem 2rem;
     text-align: left;
   }

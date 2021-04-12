@@ -1,13 +1,3 @@
-import { AnyAction } from 'redux';
-import { ThunkAction } from 'redux-thunk';
-
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  State,
-  unknown,
-  AnyAction
->;
-
 export type Markets = {
   id: string;
   symbol: string;

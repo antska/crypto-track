@@ -2,8 +2,10 @@ import React, { RefObject, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import { useSelector } from 'react-redux';
 
 import { SBoxContainer } from 'scenes/CoinDetails/styled';
+import { getCurrency, getTheme } from 'store/global/selectors';
 import GraphRanges from './components/GraphRanges';
 import { priceGraphOptions } from '../../../../constants';
 
@@ -18,6 +20,8 @@ const SWrapper = styled.div`
 
 const Graph = ({ data, isGraphLoading }: Props) => {
   const [options, setOptions] = useState(priceGraphOptions);
+  const currency = useSelector(getCurrency());
+  const theme = useSelector(getTheme());
   const graphRef = useRef<{
     chart: Highcharts.Chart;
     container: RefObject<HTMLDivElement>;
@@ -34,8 +38,32 @@ const Graph = ({ data, isGraphLoading }: Props) => {
   }, [graphRef, isGraphLoading]);
 
   useEffect(() => {
+    const bgColor = theme === 'light' ? '#F5F5F5' : '#464646';
+    const textColor = theme === 'light' ? '#464646' : 'white';
+
     setOptions({
       ...options,
+      chart: {
+        backgroundColor: bgColor,
+      },
+      title: {
+        style: { color: textColor },
+      },
+      yAxis: {
+        title: {
+          text: `Price (${currency.name.toUpperCase()})`,
+          style: { color: textColor },
+        },
+        labels: {
+          style: { color: textColor },
+        },
+      },
+      xAxis: {
+        labels: {
+          style: { color: textColor },
+        },
+        type: 'datetime',
+      },
       series: [
         {
           type: 'area',
@@ -44,12 +72,12 @@ const Graph = ({ data, isGraphLoading }: Props) => {
           data,
           tooltip: {
             valueDecimals: 2,
-            valuePrefix: '$',
+            valuePrefix: currency.symbol,
           },
         },
       ],
     });
-  }, [data]);
+  }, [data, currency.symbol, theme]);
 
   return (
     <SWrapper>

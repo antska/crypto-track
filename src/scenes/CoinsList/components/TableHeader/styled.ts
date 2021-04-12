@@ -28,12 +28,12 @@ export const SNavigation = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: ${({ theme }) => theme.palette.secondary.alt};
+  color: ${({ theme }) => theme.colors.coral};
 
   a {
     display: flex;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
-    background: ${({ theme }) => theme.palette.primary.ligth};
+    background: ${({ theme }) => theme.colors.lightgray};
     padding: 4px;
     border: 1px solid ${({ theme }) => theme.palette.primary.main};
     border-radius: 5px;

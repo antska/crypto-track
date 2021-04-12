@@ -1,13 +1,3 @@
-import { AnyAction } from 'redux';
-import { ThunkAction } from 'redux-thunk';
-
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  State,
-  unknown,
-  AnyAction
->;
-
 type Links = {
   homepage: string[];
   official_forum_url: string[];

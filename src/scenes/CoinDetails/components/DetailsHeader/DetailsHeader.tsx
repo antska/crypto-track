@@ -12,6 +12,7 @@ import { MdForum } from 'react-icons/md';
 import { getCoinDetails } from 'store/coin/selectors';
 import PercentageField from 'components/PercentageField';
 import { Currency } from 'store/coin/types';
+import { getCurrency } from 'store/global/selectors';
 import {
   SContainer,
   SPriceContainer,
@@ -24,6 +25,7 @@ const DetailsHeader = () => {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { name, image, symbol, market_data, links } =
     useSelector(getCoinDetails()) || {};
+  const currency = useSelector(getCurrency());
 
   const linksArray = [
     {
@@ -77,7 +79,10 @@ const DetailsHeader = () => {
         <STitleContainer>
           {market_data?.current_price && (
             <h1>
-              ${(market_data?.current_price as Currency)?.usd.toLocaleString()}
+              {currency.symbol}
+              {(market_data?.current_price as Currency)[
+                currency.name
+              ].toLocaleString()}
             </h1>
           )}
           {market_data?.price_change_percentage_24h && (

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { queries } from '../../constants';
 
 export const SBoxContainer = styled.div`
-  background: white;
+  background: ${({ theme }) => theme.palette.primary.light};
   border: 1px solid ${({ theme }) => theme.palette.primary.main};
   border-radius: 10px;
   box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);

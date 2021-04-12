@@ -4,15 +4,19 @@ import { Dispatch } from 'redux';
 import * as types from './actionTypes';
 import { BASE_API_ENDPOINT } from '../../constants';
 
-export const fetchMarketsList = ({ page }: { page: number }) => async (
-  dispatch: Dispatch,
-) => {
+export const fetchMarketsList = ({
+  page,
+  currency,
+}: {
+  page: number;
+  currency?: string;
+}) => async (dispatch: Dispatch) => {
   dispatch({ type: types.GET_MARKETS_LIST_REQUEST });
   let response;
 
   try {
     response = await axios.get(
-      `${BASE_API_ENDPOINT}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=${page}&sparkline=false`,
+      `${BASE_API_ENDPOINT}/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=50&page=${page}&sparkline=false`,
     );
 
     if (response.status !== 200) {

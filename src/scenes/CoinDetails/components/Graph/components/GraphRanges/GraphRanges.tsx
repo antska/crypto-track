@@ -18,9 +18,9 @@ const SButton = styled.button<{ isActive: boolean }>`
   cursor: pointer;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
   background: ${({ theme, isActive }) =>
-    isActive ? theme.palette.secondary.main : theme.palette.primary.ligth};
+    isActive ? theme.palette.secondary.main : theme.palette.primary.light};
   color: ${({ theme, isActive }) =>
-    isActive ? 'white' : theme.palette.secondary.main};
+    isActive ? theme.palette.primary.main : theme.palette.secondary.main};
   padding: 8px;
   border: 1px solid
     ${({ theme, isActive }) =>

@@ -11,6 +11,7 @@ import { getCoinDetails } from 'store/coin/selectors';
 import { SContainer, STable } from 'scenes/CoinDetails/styled';
 import PercentageField from 'components/PercentageField';
 import { ATHLDate, Currency } from 'store/coin/types';
+import { getCurrency, getTheme } from 'store/global/selectors';
 import {
   CHANGE_PERCENTAGES,
   DEVELOPER_STATS,
@@ -42,36 +43,53 @@ const CoinStatistics = () => {
   const [optionsUpVotes, setOptionsUpVotes] = useState(gaugeOptions);
   const [optionsDownVotes, setOptionsDownVotes] = useState(gaugeOptions);
   const details = useSelector(getCoinDetails());
+  const currency = useSelector(getCurrency());
+  const theme = useSelector(getTheme());
 
   const athPrice =
-    (details?.market_data?.ath as Currency)?.usd?.toLocaleString() ?? '';
+    (details?.market_data?.ath as Currency)?.[
+      currency.name
+    ]?.toLocaleString() ?? '';
   const atlPrice =
-    (details?.market_data?.atl as Currency)?.usd?.toLocaleString() ?? '';
+    (details?.market_data?.atl as Currency)?.[
+      currency.name
+    ]?.toLocaleString() ?? '';
   const low24h =
-    (details?.market_data?.low_24h as Currency)?.usd?.toLocaleString() ?? '';
+    (details?.market_data?.low_24h as Currency)?.[
+      currency.name
+    ]?.toLocaleString() ?? '';
   const high24h =
-    (details?.market_data?.high_24h as Currency)?.usd?.toLocaleString() ?? '';
+    (details?.market_data?.high_24h as Currency)?.[
+      currency.name
+    ]?.toLocaleString() ?? '';
 
   const athPriceDate = useMemo(
     () =>
-      moment((details?.market_data?.ath_date as ATHLDate)?.usd).format(
-        "MMM Do 'YY",
-      ),
+      moment(
+        (details?.market_data?.ath_date as ATHLDate)?.[currency.name],
+      ).format("MMM Do 'YY"),
     [details],
   );
 
   const atlPriceDate = useMemo(
     () =>
-      moment((details?.market_data?.atl_date as ATHLDate)?.usd).format(
-        "MMM Do 'YY",
-      ),
+      moment(
+        (details?.market_data?.atl_date as ATHLDate)?.[currency.name],
+      ).format("MMM Do 'YY"),
     [details],
   );
 
   useEffect(() => {
     setOptionsUpVotes({
       ...optionsUpVotes,
-      title: { text: 'Up Votes' },
+      chart: {
+        type: 'solidgauge',
+        backgroundColor: theme === 'light' ? '#F5F5F5' : '#464646',
+      },
+      title: {
+        text: 'Up Votes',
+        style: { color: theme === 'light' ? '#464646' : 'white' },
+      },
       series: [
         {
           name: 'Up Votes',
@@ -88,7 +106,14 @@ const CoinStatistics = () => {
 
     setOptionsDownVotes({
       ...optionsDownVotes,
-      title: { text: 'Down Votes' },
+      chart: {
+        type: 'solidgauge',
+        backgroundColor: theme === 'light' ? '#F5F5F5' : '#464646',
+      },
+      title: {
+        text: 'Down Votes',
+        style: { color: theme === 'light' ? '#464646' : 'white' },
+      },
       series: [
         {
           name: 'Down Votes',
@@ -105,6 +130,7 @@ const CoinStatistics = () => {
   }, [
     details?.sentiment_votes_up_percentage,
     details?.sentiment_votes_down_percentage,
+    theme,
   ]);
 
   return (
@@ -113,11 +139,17 @@ const CoinStatistics = () => {
         <tbody>
           <tr>
             <th>Lowest 24h</th>
-            <td>${low24h}</td>
+            <td>
+              {currency.symbol}
+              {low24h}
+            </td>
           </tr>
           <tr>
             <th>Highest 24h</th>
-            <td>${high24h}</td>
+            <td>
+              {currency.symbol}
+              {high24h}
+            </td>
           </tr>
           {CHANGE_PERCENTAGES.map((price) => (
             <tr key={price.value}>
@@ -132,14 +164,16 @@ const CoinStatistics = () => {
           <tr>
             <th>ATH & Date</th>
             <td>
-              ${athPrice}
+              {currency.symbol}
+              {athPrice}
               <p>{athPriceDate}</p>
             </td>
           </tr>
           <tr>
             <th>ATL & Date</th>
             <td>
-              ${atlPrice}
+              {currency.symbol}
+              {atlPrice}
               <p>{atlPriceDate}</p>
             </td>
           </tr>

@@ -26,7 +26,7 @@ const SLink = styled(Link)`
   gap: 1rem;
   margin-top: 5rem;
   font-size: 1rem;
-  background: ${({ theme }) => theme.palette.primary.ligth};
+  background: ${({ theme }) => theme.palette.primary.light};
   border: 1px solid ${({ theme }) => theme.palette.primary.main};
   border-radius: 10px;
   box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.1);

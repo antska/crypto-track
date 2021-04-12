@@ -16,6 +16,8 @@ import {
   getCoinGraphDuration,
   getCoinGraphLoading,
 } from 'store/coin/selectors';
+import SEO from 'components/SEO';
+import { getCurrency } from 'store/global/selectors';
 import Graph from './components/Graph';
 import DetailsHeader from './components/DetailsHeader';
 import {
@@ -25,7 +27,6 @@ import {
   SMoreContainer,
 } from './styled';
 import CoinStatistics from './components/CoinStatistics';
-import SEO from '../../components/SEO/SEO';
 
 const CoinDetails = () => {
   const dispatch = useDispatch();
@@ -34,13 +35,14 @@ const CoinDetails = () => {
   const isDetailsLoading = useSelector(getCoinDetailsLoading());
   const error = useSelector(getCoinDetailsError());
   const details = useSelector(getCoinDetails());
+  const currency = useSelector(getCurrency());
   const days = useSelector(getCoinGraphDuration());
   const { coin } = useParams<{ coin: string }>();
   const [descriptionText, setDescriptionText] = useState('');
 
   useEffect(() => {
-    dispatch(fetchCoinGraph({ coin, days }));
-  }, [days]);
+    dispatch(fetchCoinGraph({ coin, days, currency: currency.name }));
+  }, [days, currency.name]);
 
   useEffect(() => {
     dispatch(fetchCoinDetails({ coin }));
