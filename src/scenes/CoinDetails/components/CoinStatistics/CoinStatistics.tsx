@@ -80,15 +80,18 @@ const CoinStatistics = () => {
   );
 
   useEffect(() => {
+    const bgColor = theme === 'light' ? '#F5F5F5' : '#464646';
+    const textColor = theme === 'light' ? '#464646' : 'white';
+
     setOptionsUpVotes({
       ...optionsUpVotes,
       chart: {
         type: 'solidgauge',
-        backgroundColor: theme === 'light' ? '#F5F5F5' : '#464646',
+        backgroundColor: bgColor,
       },
       title: {
         text: 'Up Votes',
-        style: { color: theme === 'light' ? '#464646' : 'white' },
+        style: { color: textColor },
       },
       series: [
         {
@@ -108,11 +111,11 @@ const CoinStatistics = () => {
       ...optionsDownVotes,
       chart: {
         type: 'solidgauge',
-        backgroundColor: theme === 'light' ? '#F5F5F5' : '#464646',
+        backgroundColor: bgColor,
       },
       title: {
         text: 'Down Votes',
-        style: { color: theme === 'light' ? '#464646' : 'white' },
+        style: { color: textColor },
       },
       series: [
         {

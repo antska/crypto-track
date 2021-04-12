@@ -47,6 +47,7 @@ const Graph = ({ data, isGraphLoading }: Props) => {
         backgroundColor: bgColor,
       },
       title: {
+        text: 'Price Change Chart',
         style: { color: textColor },
       },
       yAxis: {

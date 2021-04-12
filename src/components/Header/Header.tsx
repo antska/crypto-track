@@ -28,16 +28,32 @@ const Header = () => {
   return (
     <SNav>
       <SLink to="/">CryptoTrack</SLink>
-      <SRightMenu>
+      <SRightMenu data-test="right-menu">
         {currency.name === 'usd' ? (
-          <BiDollar size="1.5em" onClick={handleChangeCurrency} />
+          <BiDollar
+            data-test="dollar-icon"
+            size="1.5em"
+            onClick={handleChangeCurrency}
+          />
         ) : (
-          <BiEuro size="1.5em" onClick={handleChangeCurrency} />
+          <BiEuro
+            data-test="euro-icon"
+            size="1.5em"
+            onClick={handleChangeCurrency}
+          />
         )}
         {theme === 'light' ? (
-          <SIconSun size="1.5em" onClick={handleChangeTheme} />
+          <SIconSun
+            data-test="sun-icon"
+            size="1.5em"
+            onClick={handleChangeTheme}
+          />
         ) : (
-          <SIconMoon size="1.5em" onClick={handleChangeTheme} />
+          <SIconMoon
+            data-test="moon-icon"
+            size="1.5em"
+            onClick={handleChangeTheme}
+          />
         )}
       </SRightMenu>
     </SNav>

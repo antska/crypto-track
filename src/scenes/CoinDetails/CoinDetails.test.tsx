@@ -11,24 +11,32 @@ import {
 import initialState from 'store/coin/initialState';
 import { State } from 'store/coin/types';
 import userEvent from '@testing-library/user-event';
+import { State as GlobalState } from 'store/global/types';
+import initialGlobalState from 'store/global/initialState';
 import CoinDetails from './CoinDetails';
 
-const renderCoinDetails = (state: State = initialState) =>
+const renderCoinDetails = (
+  state: State = initialState,
+  globalState: GlobalState = initialGlobalState,
+) =>
   renderWithRedux(
     <BrowserRouter>
       <CoinDetails />
     </BrowserRouter>,
     {
-      initialState: { coin: state },
+      initialState: { coin: state, global: globalState },
     },
   );
 
 describe('<CoinDetails />', () => {
   afterEach(() => jest.restoreAllMocks());
-  it('will render description block', async () => {
+  it('will render description block in dark mode', async () => {
     mockFetchCoinDetailsSuccess();
     const mockData = mockCoinDetails();
-    renderCoinDetails(mockData);
+    renderCoinDetails(mockData, {
+      theme: 'dark',
+      currency: initialGlobalState.currency,
+    });
 
     await waitFor(() => screen.getByTestId('description-block'));
 

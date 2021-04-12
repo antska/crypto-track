@@ -2,10 +2,10 @@ import React, { useMemo } from 'react';
 import { RiArrowUpSFill, RiArrowDownSFill } from 'react-icons/ri';
 import { VscDash } from 'react-icons/vsc';
 import styled from 'styled-components';
-
 import { useSelector } from 'react-redux';
+
+import { getTheme } from 'store/global/selectors';
 import { queries } from '../../constants';
-import { getTheme } from '../../store/global/selectors';
 
 interface Props {
   perc: number;
